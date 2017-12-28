@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dal.intl.inter.IItemOperation">
+    <select id="getAllItems" resultType="ItemDO">
+      SELECT * from Item
+    </select>
+
+    <select id="getItemById" parameterType="long" resultType="ItemDO">
+        SELECT * from Item where id = #{id}
+    </select>
+
+    <select id="updateItem" parameterType="UserDO" resultType="ItemDO">
+        UPDATE Item SET name=#{name},price=#{price},detail=#{detail}
+    </select>
+</mapper>

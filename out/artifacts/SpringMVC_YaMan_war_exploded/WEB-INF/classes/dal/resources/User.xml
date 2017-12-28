@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这里的namespace必须与接口路径一致 -->
+<mapper namespace="dal.intl.inter.IUserOperation">
+    <resultMap type="UserDO" id="resultListUser">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"/>
+        <result column="userAge" property="userAge"/>
+        <result column="userAddress" property="userAddress"/>
+    </resultMap>
+    <!--<select id="selectUserByID" parameterType="int" resultType="UserDAO">-->
+    <!--select * from `user` where id = #{id}-->
+    <!--</select>-->
+    <select id="selectUsers" parameterType="string" resultMap="resultListUser">
+        select * from user where userName like #{userName}
+    </select>
+
+    <insert id="addUser" parameterType="UserDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(userName,userAge,userAddress) VALUES (#{userName},#{userAge},#{userAddress})
+    </insert>
+
+    <update id="updateUser" parameterType="UserDO">
+        update user set userName=#{userName},userAge=#{userAge},userAddress=#{userAddress}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE from user where id = #{id}
+    </delete>
+</mapper>
